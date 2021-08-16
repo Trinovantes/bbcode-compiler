@@ -1,0 +1,142 @@
+[style size="30px"]Large Text[/style]
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Vestibulum tempor tellus in sapien cursus, et commodo massa placerat.
+Maecenas mattis libero at diam fringilla, id viverra arcu dignissim.
+
+[b]Lorem ipsum dolor sit amet, consectetur adipiscing elit.[/b]
+[i]Vestibulum congue sem ac tellus blandit, vitae pulvinar risus ornare.[/i]
+[u]Vestibulum in sapien ut lectus gravida faucibus eu nec orci.[/u]
+[s]Sed efficitur lacus sed bibendum venenatis.[/s]
+
+[url]https://en.wikipedia.org[/url]
+[url=https://en.wikipedia.org]English Wikipedia[/url]
+[URL=data:text/html;base64,PHNjcmlwdD5hbGVydChkb2N1bWVudC5jb29raWUpOzwvc2NyaXB0Pg]safe link[/URL]
+
+[quote]quoted text[/quote]
+[quote="author"]quoted text[/quote]
+
+[b]Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+[b]Lorem ipsum dolor sit amet, consectetur adipiscing elit.[i]Lorem ipsum dolor sit amet, consectetur adipiscing elit.[/b]
+[b]Lorem ipsum dolor sit amet, consectetur adipiscing elit.[i]Lorem ipsum dolor sit amet, consectetur adipiscing elit.[/i]
+
+Maecenas lobortis erat eget diam sollicitudin, nec tincidunt risus tempor.
+Duis aliquam turpis id nunc tristique eleifend.
+Etiam vitae lacus nec turpis dictum mattis.
+
+[code]monospaced text[/code]
+
+Nunc efficitur odio in quam mattis vehicula.
+
+[img]j&#X41vascript:alert(document.cookie)[/img]
+
+Nam nec nisl vitae dolor ornare vulputate vel ac lectus.
+Mauris maximus lorem non ante porttitor, ut hendrerit neque dignissim.
+Integer ut nisi et nibh fermentum lobortis.
+
+[style size="85"]Smaller Text[/style]
+
+Phasellus ac massa eu nisl lobortis hendrerit.
+Aenean pretium lacus vitae mattis tempus.
+Praesent eu arcu nec enim dignissim facilisis vel non mi.
+
+[style color="fuchsia"]Text in fuchsia[/style] or
+[style color=#FF00FF]Text in fuchsia[/style] or
+[color=#FF00FF]Text in fuchsia[/color]
+
+Etiam auctor felis in scelerisque accumsan.
+Curabitur vestibulum ligula ac eros dignissim, id mattis lectus ultricies.
+Praesent eget diam in nisl ultricies auctor quis sed nisl.
+Cras vestibulum arcu a ornare congue.
+Suspendisse ullamcorper ipsum non felis vehicula, vitae lobortis ex ultrices.
+
+[list]
+  [*]Entry A
+  [*]Entry B
+[/list]
+
+[list=1]
+  [*]Entry 1
+  [*]Entry 2
+[/list]
+
+Aliquam eu lorem vel lorem tempor pellentesque id in eros.
+Cras ornare sem a lectus pretium bibendum.
+
+Nam facilisis nisl sit amet leo eleifend rhoncus.
+Fusce rutrum libero ut purus pretium placerat.
+In cursus diam in gravida egestas.
+Mauris eget velit convallis, dignissim mi eget, cursus justo.
+Ut at mauris varius, scelerisque leo non, volutpat lacus.
+
+[table]
+[tr]
+  [td]table cell 1[/td]
+  [td]table cell 2[/td]
+[/tr]
+[tr]
+  [td]table cell 3[/td]
+  [td]table cell 4[/td]
+[/tr]
+[/table]
+
+Fusce euismod felis nec libero posuere feugiat ac a lectus.
+Nunc cursus nisi vel augue convallis bibendum.
+Nulla ornare libero at nulla volutpat fringilla.
+Fusce lacinia metus eget tincidunt pulvinar.
+Donec dapibus lectus eget pharetra pretium.
+
+Cras non magna in augue euismod dapibus.
+Donec aliquam nisi ut nulla vulputate, non suscipit odio euismod.
+Sed faucibus neque a interdum maximus.
+Morbi eget urna non est mattis gravida vel sed odio.
+Nulla ac lectus tincidunt, imperdiet arcu nec, malesuada quam.
+Nunc gravida nulla tincidunt elementum pretium.
+
+Vivamus dictum odio vel rutrum pharetra.
+Aenean tincidunt turpis et efficitur maximus.
+Quisque a orci eget nunc fringilla suscipit nec sed dolor.
+Cras porta mauris vitae odio viverra rutrum.
+Nullam eu magna in erat fermentum elementum ut facilisis felis.
+Praesent elementum velit ut varius malesuada.
+
+Pellentesque et nunc ac arcu consectetur facilisis ut a metus.
+
+Donec et augue vitae nunc fermentum finibus a nec nisl.
+Nulla vulputate turpis in euismod luctus.
+Vestibulum vitae massa rhoncus, posuere risus accumsan, aliquet elit.
+Nulla at nisl sit amet dolor tincidunt mollis.
+In molestie justo vitae mauris rhoncus mollis.
+Duis sed justo porttitor orci sodales iaculis.
+
+[/i]
+
+Aliquam pharetra metus condimentum, sagittis ex ac, vehicula ipsum.
+Phasellus at nibh id tellus interdum dignissim vitae in eros.
+Etiam volutpat justo a dui ornare blandit.
+Sed pharetra ante at porta feugiat.
+Curabitur fringilla diam vitae orci vulputate, eu congue mi facilisis.
+
+Quisque congue ipsum ultricies, varius turpis vitae, consectetur dolor.
+
+Maecenas hendrerit velit a pharetra pulvinar.
+Fusce iaculis metus a posuere mattis.
+Mauris sit amet nulla mollis, congue mauris a, pellentesque arcu.
+
+Sed maximus urna id ipsum tristique malesuada.
+Ut ac diam sollicitudin, dapibus ex nec, vulputate tellus.
+Ut vitae nisl gravida, mollis mi quis, imperdiet ante.
+Donec ac velit cursus, facilisis tellus eu, lacinia metus.
+Proin tincidunt elit sed cursus malesuada.
+
+Nulla at diam dignissim, aliquet nulla et, dignissim urna.
+
+Duis in leo ac libero rutrum sollicitudin sit amet ac est.
+Praesent porta sapien in eros facilisis, nec efficitur ipsum suscipit.
+
+[i][url=https://en.wikipedia.org]English Wikipedia[/url][/i]
+[url=https://en.wikipedia.org][i]English Wikipedia[/url][/i]
+[url=https://en.wikipedia.org][i]English Wikipedia[/i][/url]
+
+Cras vel quam nec mauris varius maximus.
+Aliquam at ligula accumsan, eleifend enim in, semper mauris.
