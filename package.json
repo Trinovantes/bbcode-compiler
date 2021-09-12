@@ -1,7 +1,7 @@
 {
     "name": "shinoa",
     "version": "0.1.0",
-    "description": "BBCode to HTML generator",
+    "description": "Fast BBCode parser and HTML/Markdown generator with TypeScript support",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
@@ -9,13 +9,14 @@
         "dist/*",
         "src/*"
     ],
+    "sideEffects": false,
     "repository": "https://github.com/Trinovantes/shinoa",
-    "author": "Trinovantes",
+    "author": "Stephen Li <hello@stephenli.ca> (https://www.stephenli.ca)",
     "license": "MIT",
     "private": false,
     "scripts": {
         "dev": "  cross-env NODE_ENV=development tsc --watch",
-        "build": "cross-env NODE_ENV=production  tsc",
+        "build": "cross-env NODE_ENV=production  tsc -p tsconfig.prod.json",
         "prepublishOnly": "rm -rf ./dist && yarn build",
         "lint": "eslint --ext '.ts' --ignore-path .gitignore .",
         "test": "jest"

@@ -13,12 +13,12 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
-        "importsNotUsedAsValues": "error",
 
         "noUnusedLocals": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
+        "importsNotUsedAsValues": "error",
 
         "outDir": "dist",
         "baseUrl": ".",
