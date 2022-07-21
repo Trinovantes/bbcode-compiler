@@ -1,7 +1,7 @@
-import { AstNode, AstNodeType, RootNode } from '../parser/AstNode'
-import { nodeIsType } from '../parser/nodeIsType'
-import { htmlTransforms } from './transforms/htmlTransforms'
-import type { Transform } from './transforms/Transform'
+import { AstNode, AstNodeType, RootNode } from '../parser/AstNode.js'
+import { nodeIsType } from '../parser/nodeIsType.js'
+import { htmlTransforms } from './transforms/htmlTransforms.js'
+import type { Transform } from './transforms/Transform.js'
 
 export class Generator {
     transforms: ReadonlyMap<string, Transform>

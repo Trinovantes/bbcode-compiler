@@ -1,7 +1,7 @@
-import { Generator } from './generator/Generator'
-import { htmlTransforms } from './generator/transforms/htmlTransforms'
-import { Lexer } from './lexer/Lexer'
-import { Parser } from './parser/Parser'
+import { Generator } from './generator/Generator.js'
+import { htmlTransforms } from './generator/transforms/htmlTransforms.js'
+import { Lexer } from './lexer/Lexer.js'
+import { Parser } from './parser/Parser.js'
 
 export function generateHtml(input: string, transforms = htmlTransforms): string {
     const lexer = new Lexer()

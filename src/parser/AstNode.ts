@@ -33,7 +33,7 @@ Attr <-
 
 */
 
-import { nodeIsType } from './nodeIsType'
+import { nodeIsType } from './nodeIsType.js'
 
 // ----------------------------------------------------------------------------
 // AstNode

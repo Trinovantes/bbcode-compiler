@@ -1,5 +1,5 @@
-import { AstNodeType, TagNode } from '../../parser/AstNode'
-import { nodeIsType } from '../../parser/nodeIsType'
+import { AstNodeType, TagNode } from '../../parser/AstNode.js'
+import { nodeIsType } from '../../parser/nodeIsType.js'
 
 /**
  * Gets the text of the immediate descendant of the current TagNode

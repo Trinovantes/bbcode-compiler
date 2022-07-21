@@ -1,4 +1,4 @@
-import { AstNodeType, AstNode, AttrNode, RootNode, TagNode, TextNode, LinebreakNode, EndTagNode, StartTagNode } from './AstNode'
+import { AstNodeType, AstNode, AttrNode, RootNode, TagNode, TextNode, LinebreakNode, EndTagNode, StartTagNode } from './AstNode.js'
 
 interface AstMap {
     [AstNodeType.RootNode]: RootNode

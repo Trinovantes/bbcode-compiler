@@ -1,4 +1,4 @@
-import { Generator, getTagImmediateText, htmlTransforms, Lexer, getWidthHeightAttr, Parser, stringifyTokens } from '../../src'
+import { Generator, getTagImmediateText, htmlTransforms, Lexer, getWidthHeightAttr, Parser, stringifyTokens } from '../../src/index.js'
 
 const customTransforms: typeof htmlTransforms = [
     ...htmlTransforms,

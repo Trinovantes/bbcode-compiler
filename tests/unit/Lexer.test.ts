@@ -1,6 +1,6 @@
-import { validationTests } from '../data/validationTests'
-import { xssTests } from '../data/xssTests'
-import { Lexer, Token, TokenType } from '@/index'
+import { validationTests } from '../data/validationTests.js'
+import { xssTests } from '../data/xssTests.js'
+import { Lexer, Token, TokenType } from '@/index.js'
 
 describe('Lexer', () => {
     describe('Validation Tests', () => {

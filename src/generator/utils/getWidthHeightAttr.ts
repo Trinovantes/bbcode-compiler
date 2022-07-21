@@ -1,4 +1,4 @@
-import type { TagNode } from '../../parser/AstNode'
+import type { TagNode } from '../../parser/AstNode.js'
 
 /**
  * Gets the width/height attributes of the TagNode if they exist

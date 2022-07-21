@@ -9,7 +9,7 @@ import bbcodejs from 'bbcodejs'
 import MarkdownIt from 'markdown-it'
 import TsBbcodeParser from 'ts-bbcode-parser'
 import Yabbcode from 'ya-bbcode'
-import { generateHtml } from '../../src'
+import { generateHtml } from '../../src/index.js'
 
 export const runners: Record<string, (input: string) => string> = {
     'bbcode-compiler': (input) => {

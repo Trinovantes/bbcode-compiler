@@ -1,6 +1,6 @@
-import { validationTests } from '../data/validationTests'
-import { xssTests } from '../data/xssTests'
-import { generateHtml } from '@/index'
+import { validationTests } from '../data/validationTests.js'
+import { xssTests } from '../data/xssTests.js'
+import { generateHtml } from '@/index.js'
 
 describe('Generator', () => {
     describe('Validation Tests', () => {

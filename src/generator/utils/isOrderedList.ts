@@ -1,4 +1,4 @@
-import type { TagNode } from '../../parser/AstNode'
+import type { TagNode } from '../../parser/AstNode.js'
 
 /**
  * Determines if the StartTag has an attribute of "1" to indicate that it's an ordered list

@@ -1,4 +1,4 @@
-import type { ValidationTestCase } from './TestCase'
+import type { ValidationTestCase } from './TestCase.js'
 
 export const validationTests: Array<ValidationTestCase> = [
     {

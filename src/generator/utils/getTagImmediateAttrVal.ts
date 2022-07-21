@@ -1,4 +1,4 @@
-import type { TagNode } from '../../parser/AstNode'
+import type { TagNode } from '../../parser/AstNode.js'
 
 /**
  * Gets the text of the immediate attribute of the current TagNode
