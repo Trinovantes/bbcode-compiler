@@ -241,7 +241,7 @@ export class Parser {
         }
 
         let root = parseRoot()
-        root = this.#matchTagNodes(root)
+        root = this.matchTagNodes(root)
         return root
     }
 
@@ -249,14 +249,14 @@ export class Parser {
     // Post Parsing Transforms
     // ------------------------------------------------------------------------
 
-    #matchTagNodes(rootNode: RootNode): RootNode {
+    private matchTagNodes(rootNode: RootNode): RootNode {
         const transformedRoot = new RootNode()
 
         for (let i = 0; i < rootNode.children.length; i++) {
             const child = rootNode.children[i]
 
             if (nodeIsType(child, AstNodeType.StartTagNode)) {
-                const endTag = this.#findMatchingEndTag(rootNode.children, i, child.tagName)
+                const endTag = this.findMatchingEndTag(rootNode.children, i, child.tagName)
                 const isStandalone = this.standaloneTags.has(child.tagName)
 
                 if (endTag || isStandalone) {
@@ -268,7 +268,7 @@ export class Parser {
                         const subRoot = new RootNode(rootNode.children.slice(i + 1, endTag.idx))
                         i = endTag.idx
 
-                        const transformedSubRoot = this.#matchTagNodes(subRoot)
+                        const transformedSubRoot = this.matchTagNodes(subRoot)
                         tagNode.addChild(transformedSubRoot)
                     }
                 } else {
@@ -292,7 +292,7 @@ export class Parser {
         return transformedRoot
     }
 
-    #findMatchingEndTag(siblings: Array<AstNode>, startIdx: number, tagName: string): { idx: number; node: EndTagNode | LinebreakNode } | null {
+    private findMatchingEndTag(siblings: Array<AstNode>, startIdx: number, tagName: string): { idx: number; node: EndTagNode | LinebreakNode } | null {
         if (this.standaloneTags.has(tagName)) {
             return null
         }
