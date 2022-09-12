@@ -6,6 +6,10 @@ const config: Config.InitialOptions = {
     setupFiles: [
         './tests/setup.ts',
     ],
+
+    moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1',
+    },
 }
 
 export default config
