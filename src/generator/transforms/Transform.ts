@@ -1,6 +1,6 @@
 import type { TagNode } from '../../parser/AstNode.js'
 
-export interface Transform {
+export type Transform = {
     name: string
 
     skipChildren?: boolean // Do not recursively render children nodes (e.g. [img]url[/url] should not render url)

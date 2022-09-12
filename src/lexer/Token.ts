@@ -1,6 +1,6 @@
 import { TokenType } from './TokenType.js'
 
-export interface Token {
+export type Token = {
     type: TokenType
     offset: number
     length: number
