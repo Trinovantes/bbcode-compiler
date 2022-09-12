@@ -1,7 +1,3 @@
-/**
- * Babel is used to transpile jest tests written in Typescript
- */
-
 module.exports = {
     presets: [
         '@babel/preset-env',
