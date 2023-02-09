@@ -1,6 +1,6 @@
 {
     "name": "bbcode-compiler",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Fast BBCode parser and HTML generator with TypeScript support",
     "exports": "./dist/index.js",
     "types": "./dist/index.d.ts",
