@@ -59,7 +59,7 @@
         "markdown-it": "^13.0.1",
         "ts-bbcode-parser": "^1.0.4",
         "ts-node": "^10.8.1",
-        "typescript": "^4.2.4",
+        "typescript": "^5.0.2",
         "ya-bbcode": "^3.0.0"
     },
     "engines": {
