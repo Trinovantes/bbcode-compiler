@@ -1,6 +1,9 @@
 {
     "ts-node": {
-        "transpileOnly": true
+        "transpileOnly": true,
+        "compilerOptions": {
+            "module": "NodeNext",
+        },
     },
     "compilerOptions": {
         "strict": true,
@@ -26,15 +29,17 @@
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
-        }
+            "@/*": ["./src/*"],
+        },
     },
     "exclude": [
+        "**/raw/**/*",
+        "**/*.html",
         "node_modules",
-        "dist"
+        "dist",
     ],
     "include": [
         "**/*",
-        ".eslintrc.cjs"
-    ]
+        ".eslintrc.cjs",
+    ],
 }
