@@ -1,13 +1,13 @@
 import Benchmark from 'benchmark'
 import { getBenchmarkInput } from './input/getBenchmarkInput.js'
-import { runners } from './runners.js'
+import { benchmarkRunners } from './benchmarkRunners.js'
 
 const input = await getBenchmarkInput()
 const suite = new Benchmark.Suite('BBCode Comparison')
 
-for (const [packageName, runPackage] of Object.entries(runners)) {
-    suite.add(packageName, () => {
-        runPackage(input)
+for (const { name, run } of benchmarkRunners) {
+    suite.add(name, () => {
+        run(input)
     })
 }
 

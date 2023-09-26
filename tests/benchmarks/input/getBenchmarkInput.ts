@@ -1,6 +1,6 @@
-import fs from 'fs/promises'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 export async function getBenchmarkInput(): Promise<string> {
     const dirname = fileURLToPath(new URL('.', import.meta.url))

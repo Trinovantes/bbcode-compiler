@@ -1,27 +1,28 @@
 import { validationTests } from '../data/validationTests.js'
 import { xssTests } from '../data/xssTests.js'
 import { Lexer, Parser } from '@/index.js'
+import { describe, test, expect } from 'vitest'
 
 describe('Parser', () => {
     describe('Validation Tests', () => {
-        it.each(validationTests)('$name', (test) => {
+        test.each(validationTests)('$name', (testCase) => {
             const lexer = new Lexer()
-            const tokens = lexer.tokenize(test.input)
+            const tokens = lexer.tokenize(testCase.input)
 
             const parser = new Parser()
-            const root = parser.parse(test.input, tokens)
+            const root = parser.parse(testCase.input, tokens)
 
             expect(root.isValid()).toBe(true)
         })
     })
 
     describe('XSS Tests', () => {
-        it.each(xssTests)('$name', (test) => {
+        test.each(xssTests)('$name', (testCase) => {
             const lexer = new Lexer()
-            const tokens = lexer.tokenize(test.input)
+            const tokens = lexer.tokenize(testCase.input)
 
             const parser = new Parser()
-            const root = parser.parse(test.input, tokens)
+            const root = parser.parse(testCase.input, tokens)
 
             expect(root.isValid()).toBe(true)
         })

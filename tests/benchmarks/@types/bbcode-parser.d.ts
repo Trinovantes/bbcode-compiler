@@ -1,6 +1,6 @@
 declare module 'bbcode-parser' {
-    class BBTag {
-        static createSimpleTag(tag: string): BBTag
+    type BBTag = {
+        createSimpleTag(tag: string): BBTag
     }
 
     class BBCodeParser {

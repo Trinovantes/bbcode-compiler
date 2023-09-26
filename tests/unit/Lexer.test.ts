@@ -1,20 +1,21 @@
 import { validationTests } from '../data/validationTests.js'
 import { xssTests } from '../data/xssTests.js'
 import { Lexer, Token, TokenType } from '@/index.js'
+import { describe, test, expect } from 'vitest'
 
 describe('Lexer', () => {
     describe('Validation Tests', () => {
-        it.each(validationTests)('$name', (test) => {
+        test.each(validationTests)('$name', (testCase) => {
             const lexer = new Lexer()
-            const tokens = lexer.tokenize(test.input)
+            const tokens = lexer.tokenize(testCase.input)
             expectValidTokens(tokens)
         })
     })
 
     describe('XSS Tests', () => {
-        it.each(xssTests)('$name', (test) => {
+        test.each(xssTests)('$name', (testCase) => {
             const lexer = new Lexer()
-            const tokens = lexer.tokenize(test.input)
+            const tokens = lexer.tokenize(testCase.input)
             expectValidTokens(tokens)
         })
     })
