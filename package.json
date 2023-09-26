@@ -26,7 +26,7 @@
         "dev": "  NODE_ENV=development tsc --watch",
         "build": "NODE_ENV=production  tsc -p tsconfig.prod.json",
         "prepublishOnly": "rm -rf ./dist && yarn build",
-        "lint": "tsc --noemit && eslint --ext '.ts' --ignore-path .gitignore .",
+        "lint": "tsc --noemit && eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
         "test": "vitest",
         "benchmark": " node --loader ts-node/esm --experimental-specifier-resolution=node                                 tests/benchmarks/benchmark.ts",
         "profile": "   node --loader ts-node/esm --experimental-specifier-resolution=node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
