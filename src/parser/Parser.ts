@@ -141,14 +141,17 @@ export class Parser {
                 }
 
                 /**
-                 * If this text must end on space, then it must not endOnQuote (implies that the space is part of the entire text)
-                 * When we encounter a space, then we must split the current token into 2 tokens and only consume the first half
+                 * SPECIAL CASE:
+                 * If we encounter a space, then we must split the current token into 2 tokens and only consume the first part
                  *
-                 *      <a b>    ->      <a>< b>
-                 *      |                |  |
-                 *      |                |  idx (new)
-                 *      |                |
-                 *      idx              (consumed)
+                 *      a b    ->      a b
+                 *      |              | |
+                 *      |              | idx (new)
+                 *      |              |
+                 *      idx            consumed
+                 *
+                 * Note: We only handle endOnSpace special case when we don't expect the current text to endOnQuotes
+                 * If it endOnQuotes, then it implies that it opened with quotes (and thus we need an enclosing/matching quote)
                  */
                 if (endOnSpace && !endOnQuotes) {
                     const origStr = stringifyTokens(ogText, [tokens[idx]])
