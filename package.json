@@ -52,11 +52,11 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^6.0.0",
         "eslint-plugin-vue": "^9.9.0",
-        "markdown-it": "^13.0.1",
+        "markdown-it": "^14.0.0",
         "ts-bbcode-parser": "^1.0.4",
         "ts-node": "^10.8.1",
         "typescript": "^5.0.2",
-        "vitest": "^0.34.5",
+        "vitest": "^1.2.1",
         "ya-bbcode": "^4.0.0"
     }
 }
