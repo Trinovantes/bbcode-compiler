@@ -36,7 +36,7 @@ Attr <-
 import { nodeIsType } from './nodeIsType.js'
 
 // ----------------------------------------------------------------------------
-// AstNode
+// MARK: AstNode
 // ----------------------------------------------------------------------------
 
 export const enum AstNodeType {
@@ -103,7 +103,7 @@ export abstract class AstNode {
 }
 
 // ----------------------------------------------------------------------------
-// Root
+// MARK: Root
 // ----------------------------------------------------------------------------
 
 export class RootNode extends AstNode {
@@ -123,7 +123,7 @@ export class RootNode extends AstNode {
 }
 
 // ----------------------------------------------------------------------------
-// Text
+// MARK: Text
 // ----------------------------------------------------------------------------
 
 export class TextNode extends AstNode {
@@ -153,7 +153,76 @@ export class LinebreakNode extends AstNode {
 }
 
 // ----------------------------------------------------------------------------
-// Tag
+// MARK: Attr
+// ----------------------------------------------------------------------------
+
+export class AttrNode extends AstNode {
+    readonly nodeType = AstNodeType.AttrNode
+
+    static readonly DEFAULT_KEY = 'default'
+
+    get key(): string {
+        switch (this.children.length) {
+            case 1: {
+                return AttrNode.DEFAULT_KEY
+            }
+            case 2: {
+                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
+                    throw new Error('Invalid TextNode')
+                }
+
+                return this.children[0].str.trim()
+            }
+        }
+
+        throw new Error('Invalid AttrNode')
+    }
+
+    get val(): string {
+        switch (this.children.length) {
+            case 1: {
+                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
+                    throw new Error('Invalid TextNode')
+                }
+
+                return this.children[0].str.trim()
+            }
+            case 2: {
+                if (!nodeIsType(this.children[1], AstNodeType.TextNode)) {
+                    throw new Error('Invalid TextNode')
+                }
+
+                return this.children[1].str.trim()
+            }
+        }
+
+        throw new Error('Invalid AttrNode')
+    }
+
+    override isValid(): boolean {
+        return super.isValid() && (this.children.length >= 1 && this.children.length <= 2)
+    }
+
+    override toShortString(): string {
+        let s = super.toShortString()
+
+        switch (this.children.length) {
+            case 1: {
+                s += ` VAL="${this.val}"`
+                break
+            }
+            case 2: {
+                s += ` KEY="${this.key}" VAL="${this.val}"`
+                break
+            }
+        }
+
+        return s
+    }
+}
+
+// ----------------------------------------------------------------------------
+// MARK: Tag
 // ----------------------------------------------------------------------------
 
 export class StartTagNode extends AstNode {
@@ -262,75 +331,6 @@ export class TagNode extends AstNode {
 
         for (const child of this.children) {
             s += '\n' + child.toString(depth + 1)
-        }
-
-        return s
-    }
-}
-
-// ----------------------------------------------------------------------------
-// Attr
-// ----------------------------------------------------------------------------
-
-export class AttrNode extends AstNode {
-    readonly nodeType = AstNodeType.AttrNode
-
-    static readonly DEFAULT_KEY = 'default'
-
-    get key(): string {
-        switch (this.children.length) {
-            case 1: {
-                return AttrNode.DEFAULT_KEY
-            }
-            case 2: {
-                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
-                    throw new Error('Invalid TextNode')
-                }
-
-                return this.children[0].str.trim()
-            }
-        }
-
-        throw new Error('Invalid AttrNode')
-    }
-
-    get val(): string {
-        switch (this.children.length) {
-            case 1: {
-                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
-                    throw new Error('Invalid TextNode')
-                }
-
-                return this.children[0].str.trim()
-            }
-            case 2: {
-                if (!nodeIsType(this.children[1], AstNodeType.TextNode)) {
-                    throw new Error('Invalid TextNode')
-                }
-
-                return this.children[1].str.trim()
-            }
-        }
-
-        throw new Error('Invalid AttrNode')
-    }
-
-    override isValid(): boolean {
-        return super.isValid() && (this.children.length >= 1 && this.children.length <= 2)
-    }
-
-    override toShortString(): string {
-        let s = super.toShortString()
-
-        switch (this.children.length) {
-            case 1: {
-                s += ` VAL="${this.val}"`
-                break
-            }
-            case 2: {
-                s += ` KEY="${this.key}" VAL="${this.val}"`
-                break
-            }
         }
 
         return s

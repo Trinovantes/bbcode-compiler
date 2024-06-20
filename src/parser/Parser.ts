@@ -18,109 +18,6 @@ export class Parser {
     parse(ogText: string, tokens: Array<Token>): RootNode {
         let idx = 0
 
-        const parseRoot = (): RootNode => {
-            const root = new RootNode()
-
-            while (idx < tokens.length) {
-                if (tokens[idx].type === TokenType.L_BRACKET) {
-                    const startIdx = idx
-                    const tagNode = parseTag()
-
-                    if (tagNode !== null) {
-                        root.addChild(tagNode)
-                    } else {
-                        const invalidTokens = tokens.slice(startIdx, idx)
-                        const str = stringifyTokens(ogText, invalidTokens)
-                        const textNode = new TextNode(str)
-                        root.addChild(textNode)
-                    }
-                } else if (tokens[idx].type === TokenType.LINEBREAK) {
-                    idx += 1 // Consume LINEBREAK
-                    root.addChild(new LinebreakNode())
-                } else {
-                    const startIdx = idx
-
-                    // Advance until we see the start of another RootNode's child (TagNode or LinebreakNode)
-                    while (idx < tokens.length && tokens[idx].type !== TokenType.L_BRACKET && tokens[idx].type !== TokenType.LINEBREAK) {
-                        idx += 1
-                    }
-
-                    const slice = tokens.slice(startIdx, idx)
-                    const str = stringifyTokens(ogText, slice)
-                    root.addChild(new TextNode(str))
-                }
-            }
-
-            return root
-        }
-
-        const parseTag = (): StartTagNode | EndTagNode | null => {
-            if (idx + 1 >= tokens.length) {
-                return null
-            }
-
-            if (tokens[idx].type !== TokenType.L_BRACKET) {
-                return null
-            }
-
-            // If L_BRACKET is followed by text, then it must be StartTag or is invalid
-            if (isStringToken(tokens[idx + 1].type)) {
-                const startIdx = idx
-                idx += 1 // Consume L_BRACKET
-
-                const labelText = parseLabel()
-                if (!this.tags.has(labelText)) {
-                    return null
-                }
-
-                const attrNodes = new Array<AttrNode>()
-                while (true) {
-                    const attrNode = parseAttr()
-                    if (attrNode === null) {
-                        break
-                    }
-
-                    attrNodes.push(attrNode)
-                }
-
-                if (tokens[idx].type !== TokenType.R_BRACKET) {
-                    return null
-                }
-
-                idx += 1 // Consume R_BRACKET
-
-                const slice = tokens.slice(startIdx, idx)
-                const ogTag = stringifyTokens(ogText, slice)
-                const startTagNode = new StartTagNode(labelText, ogTag, attrNodes)
-                return startTagNode
-            }
-
-            // If L_BRACKET is followed by BACKSLASH, then it must be EndTag or is invalid
-            if (tokens[idx + 1].type === TokenType.BACKSLASH) {
-                const startIdx = idx
-                idx += 1 // Consume L_BRACKET
-                idx += 1 // Consume BACKSLASH
-
-                const labelText = parseLabel()
-                if (!this.tags.has(labelText)) {
-                    return null
-                }
-
-                if (tokens[idx].type !== TokenType.R_BRACKET) {
-                    return null
-                }
-
-                idx += 1 // Consume R_BRACKET
-
-                const slice = tokens.slice(startIdx, idx)
-                const ogTag = stringifyTokens(ogText, slice)
-                const endTagNode = new EndTagNode(labelText, ogTag)
-                return endTagNode
-            }
-
-            return null
-        }
-
         const parseLabel = (): string => {
             const slice = tokens.slice(idx, idx + 1)
             const label = stringifyTokens(ogText, slice)
@@ -241,6 +138,109 @@ export class Parser {
             }
 
             return attrNode
+        }
+
+        const parseTag = (): StartTagNode | EndTagNode | null => {
+            if (idx + 1 >= tokens.length) {
+                return null
+            }
+
+            if (tokens[idx].type !== TokenType.L_BRACKET) {
+                return null
+            }
+
+            // If L_BRACKET is followed by text, then it must be StartTag or is invalid
+            if (isStringToken(tokens[idx + 1].type)) {
+                const startIdx = idx
+                idx += 1 // Consume L_BRACKET
+
+                const labelText = parseLabel()
+                if (!this.tags.has(labelText)) {
+                    return null
+                }
+
+                const attrNodes = new Array<AttrNode>()
+                while (true) {
+                    const attrNode = parseAttr()
+                    if (attrNode === null) {
+                        break
+                    }
+
+                    attrNodes.push(attrNode)
+                }
+
+                if (tokens[idx].type !== TokenType.R_BRACKET) {
+                    return null
+                }
+
+                idx += 1 // Consume R_BRACKET
+
+                const slice = tokens.slice(startIdx, idx)
+                const ogTag = stringifyTokens(ogText, slice)
+                const startTagNode = new StartTagNode(labelText, ogTag, attrNodes)
+                return startTagNode
+            }
+
+            // If L_BRACKET is followed by BACKSLASH, then it must be EndTag or is invalid
+            if (tokens[idx + 1].type === TokenType.BACKSLASH) {
+                const startIdx = idx
+                idx += 1 // Consume L_BRACKET
+                idx += 1 // Consume BACKSLASH
+
+                const labelText = parseLabel()
+                if (!this.tags.has(labelText)) {
+                    return null
+                }
+
+                if (tokens[idx].type !== TokenType.R_BRACKET) {
+                    return null
+                }
+
+                idx += 1 // Consume R_BRACKET
+
+                const slice = tokens.slice(startIdx, idx)
+                const ogTag = stringifyTokens(ogText, slice)
+                const endTagNode = new EndTagNode(labelText, ogTag)
+                return endTagNode
+            }
+
+            return null
+        }
+
+        const parseRoot = (): RootNode => {
+            const root = new RootNode()
+
+            while (idx < tokens.length) {
+                if (tokens[idx].type === TokenType.L_BRACKET) {
+                    const startIdx = idx
+                    const tagNode = parseTag()
+
+                    if (tagNode !== null) {
+                        root.addChild(tagNode)
+                    } else {
+                        const invalidTokens = tokens.slice(startIdx, idx)
+                        const str = stringifyTokens(ogText, invalidTokens)
+                        const textNode = new TextNode(str)
+                        root.addChild(textNode)
+                    }
+                } else if (tokens[idx].type === TokenType.LINEBREAK) {
+                    idx += 1 // Consume LINEBREAK
+                    root.addChild(new LinebreakNode())
+                } else {
+                    const startIdx = idx
+
+                    // Advance until we see the start of another RootNode's child (TagNode or LinebreakNode)
+                    while (idx < tokens.length && tokens[idx].type !== TokenType.L_BRACKET && tokens[idx].type !== TokenType.LINEBREAK) {
+                        idx += 1
+                    }
+
+                    const slice = tokens.slice(startIdx, idx)
+                    const str = stringifyTokens(ogText, slice)
+                    root.addChild(new TextNode(str))
+                }
+            }
+
+            return root
         }
 
         let root = parseRoot()

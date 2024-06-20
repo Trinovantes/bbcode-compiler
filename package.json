@@ -1,16 +1,23 @@
 {
     "name": "bbcode-compiler",
+    "type": "module",
     "version": "0.1.5",
     "description": "Parses BBCode and generates HTML ",
-    "exports": "./dist/index.js",
+    "license": "MIT",
+    "private": false,
+    "sideEffects": false,
     "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.umd.cjs"
+        }
+    },
     "files": [
         "README.md",
         "dist/*",
         "src/*"
     ],
-    "type": "module",
-    "sideEffects": false,
     "repository": {
         "type": "git",
         "url": "https://github.com/Trinovantes/bbcode-compiler"
@@ -20,13 +27,10 @@
         "email": "hello@stephenli.ca",
         "url": "https://www.stephenli.ca"
     },
-    "license": "MIT",
-    "private": false,
     "scripts": {
-        "dev": "  NODE_ENV=development tsc --watch",
-        "build": "NODE_ENV=production  tsc -p tsconfig.prod.json",
+        "build": "NODE_ENV=production vite build",
         "prepublishOnly": "rm -rf ./dist && yarn build",
-        "lint": "tsc --noemit && eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+        "lint": "tsc --noEmit && eslint",
         "test": "vitest",
         "benchmark": " node --loader ts-node/esm --experimental-specifier-resolution=node                                 tests/benchmarks/benchmark.ts",
         "profile": "   node --loader ts-node/esm --experimental-specifier-resolution=node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
@@ -34,28 +38,25 @@
     "devDependencies": {
         "@bbob/html": "^3.0.0",
         "@bbob/preset-html5": "^3.0.0",
+        "@eslint/js": "^9.4.0",
+        "@stylistic/eslint-plugin": "^2.1.0",
         "@thoughtsunificator/bbcode-parser-template": "^1.0.9",
         "@types/benchmark": "^2.1.1",
-        "@types/markdown-it": "^13.0.1",
+        "@types/markdown-it": "^14.1.1",
         "@types/node": "^20.7.0",
-        "@typescript-eslint/eslint-plugin": "^7.5.0",
-        "@typescript-eslint/parser": "^7.5.0",
         "bbcode": "^0.1.5",
         "bbcode-parser": "^1.0.10",
         "bbcodejs": "^0.0.4",
         "benchmark": "^2.1.4",
-        "eslint": "^8.15.0",
-        "eslint-config-standard": "^17.0.0",
-        "eslint-import-resolver-typescript": "^3.5.3",
-        "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-n": "^17.0.0-6",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^6.0.0",
+        "eslint": "^9.4.0",
+        "eslint-plugin-n": "^17.7.0",
         "eslint-plugin-vue": "^9.9.0",
         "markdown-it": "^14.0.0",
         "ts-bbcode-parser": "^1.0.4",
         "ts-node": "^10.8.1",
         "typescript": "^5.0.2",
+        "typescript-eslint": "^8.0.0-alpha.24",
+        "vite-plugin-dts": "^3.9.1",
         "vitest": "^1.2.1",
         "ya-bbcode": "^4.0.0"
     }
