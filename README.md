@@ -1,8 +1,6 @@
 # BBCode Compiler
 
-This is a fast BBCode parser and HTML generator with TypeScript support.
-
-**Note:** This package is only available in ESM format.
+This is a BBCode parser and HTML generator implemented in pure TypeScript.
 
 ## Usage
 
