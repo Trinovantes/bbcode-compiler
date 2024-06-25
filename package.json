@@ -38,8 +38,8 @@
         "postinstall": "patch-package",
         "lint": "vue-tsc --noEmit && eslint",
         "test": "vitest",
-        "benchmark": " node --loader ts-node/esm --experimental-specifier-resolution=node                                 tests/benchmarks/benchmark.ts",
-        "profile": "   node --loader ts-node/esm --experimental-specifier-resolution=node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
+        "benchmark": "tsx tests/benchmarks/benchmark.ts",
+        "profile": "tsx --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
     },
     "dependencies": {
         "patch-package": "^8.0.0"
@@ -75,6 +75,7 @@
         "shiki": "^1.9.0",
         "ts-bbcode-parser": "^1.0.4",
         "ts-node": "^10.8.1",
+        "tsx": "^4.15.7",
         "typescript": "^5.0.2",
         "typescript-eslint": "^8.0.0-alpha.24",
         "vite-plugin-dts": "^3.9.1",
