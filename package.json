@@ -41,6 +41,9 @@
         "benchmark": " node --loader ts-node/esm --experimental-specifier-resolution=node                                 tests/benchmarks/benchmark.ts",
         "profile": "   node --loader ts-node/esm --experimental-specifier-resolution=node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
     },
+    "dependencies": {
+        "patch-package": "^8.0.0"
+    },
     "devDependencies": {
         "@bbob/html": "^3.0.0",
         "@bbob/preset-html5": "^3.0.0",
@@ -67,7 +70,6 @@
         "markdown-it": "^14.0.0",
         "mitt": "^3.0.1",
         "monaco-editor": "^0.50.0",
-        "patch-package": "^8.0.0",
         "quasar": "^2.16.4",
         "sass": "^1.77.6",
         "shiki": "^1.9.0",
