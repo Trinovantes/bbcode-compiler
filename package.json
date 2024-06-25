@@ -1,7 +1,7 @@
 {
     "name": "bbcode-compiler",
     "type": "module",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "Parses BBCode and generates HTML ",
     "license": "MIT",
     "private": false,
