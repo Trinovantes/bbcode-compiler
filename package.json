@@ -18,6 +18,7 @@
         "dist/*",
         "src/*"
     ],
+    "homepage": "https://trinovantes.github.io/bbcode-compiler/",
     "repository": {
         "type": "git",
         "url": "https://github.com/Trinovantes/bbcode-compiler"
@@ -28,9 +29,14 @@
         "url": "https://www.stephenli.ca"
     },
     "scripts": {
-        "build": "NODE_ENV=production vite build",
-        "prepublishOnly": "rm -rf ./dist && yarn build",
-        "lint": "tsc --noEmit && eslint",
+        "demoDev": "    vite         --config vite.config.demo.ts",
+        "demoBuild": "  vite build   --config vite.config.demo.ts",
+        "demoPreview": "vite preview --config vite.config.demo.ts",
+        "clean": "rm -rf ./dist ./demo/dist",
+        "build": "yarn clean && vite build",
+        "prepublishOnly": "yarn build",
+        "postinstall": "patch-package",
+        "lint": "vue-tsc --noEmit && eslint",
         "test": "vitest",
         "benchmark": " node --loader ts-node/esm --experimental-specifier-resolution=node                                 tests/benchmarks/benchmark.ts",
         "profile": "   node --loader ts-node/esm --experimental-specifier-resolution=node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
@@ -40,11 +46,15 @@
         "@bbob/preset-html5": "^3.0.0",
         "@eslint/compat": "^1.1.0",
         "@eslint/js": "^9.4.0",
+        "@quasar/extras": "^1.16.11",
+        "@quasar/vite-plugin": "^1.7.0",
         "@stylistic/eslint-plugin": "^2.1.0",
         "@thoughtsunificator/bbcode-parser-template": "^1.0.9",
         "@types/benchmark": "^2.1.1",
+        "@types/lodash.debounce": "^4.0.9",
         "@types/markdown-it": "^14.1.1",
         "@types/node": "^20.7.0",
+        "@vitejs/plugin-vue": "^5.0.5",
         "bbcode": "^0.1.5",
         "bbcode-parser": "^1.0.10",
         "bbcodejs": "^0.0.4",
@@ -52,13 +62,22 @@
         "eslint": "^9.4.0",
         "eslint-plugin-n": "^17.7.0",
         "eslint-plugin-vue": "^9.9.0",
+        "lodash.debounce": "^4.0.8",
+        "lz-string": "^1.5.0",
         "markdown-it": "^14.0.0",
+        "mitt": "^3.0.1",
+        "monaco-editor": "^0.50.0",
+        "patch-package": "^8.0.0",
+        "quasar": "^2.16.4",
+        "sass": "^1.77.6",
+        "shiki": "^1.9.0",
         "ts-bbcode-parser": "^1.0.4",
         "ts-node": "^10.8.1",
         "typescript": "^5.0.2",
         "typescript-eslint": "^8.0.0-alpha.24",
         "vite-plugin-dts": "^3.9.1",
         "vitest": "^1.2.1",
+        "vue": "^3.4.30",
         "ya-bbcode": "^4.0.0"
     }
 }

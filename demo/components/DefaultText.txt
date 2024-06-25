@@ -1,0 +1,19 @@
+This is a BBCode parser and HTML generator implemented in pure TypeScript.
+
+You can find more information and the source code on [url src="https://github.com/Trinovantes/bbcode-compiler"]GitHub[/url].
+
+[br]
+
+[br]
+
+By default, BBCode assumes everything is inline and thus does [b]not[/b] have paragraphs.
+
+Some other implementations assume double linebreaks denote new paragraphs.
+
+If you wish to emulate paragraphs with [code]bbcode-compiler[/code], you will need to add [code]br[/code] tags.
+
+[br]
+
+[br]
+
+Alternatively, you can pass the output from [code]generateHtml[/code] to another parser like [code]markdown-it[/code] to convert double linebreaks into paragraphs.

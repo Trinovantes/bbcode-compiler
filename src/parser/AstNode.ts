@@ -40,35 +40,28 @@ import { nodeIsType } from './nodeIsType.js'
 // ----------------------------------------------------------------------------
 
 export const enum AstNodeType {
-    RootNode,
-    TextNode,
-    LinebreakNode,
-    TagNode,
-    StartTagNode,
-    EndTagNode,
-    AttrNode,
+    RootNode = 'RootNode',
+    TextNode = 'TextNode',
+    LinebreakNode = 'LinebreakNode',
+    TagNode = 'TagNode',
+    StartTagNode = 'StartTagNode',
+    EndTagNode = 'EndTagNode',
+    AttrNode = 'AttrNode',
 }
 
-export function nodeTypeToString(nodeType: AstNodeType): string {
-    switch (nodeType) {
-        case AstNodeType.RootNode: return 'RootNode'
-        case AstNodeType.TextNode: return 'TextNode'
-        case AstNodeType.LinebreakNode: return 'LinebreakNode'
-        case AstNodeType.TagNode: return 'TagNode'
-        case AstNodeType.StartTagNode: return 'StartTagNode'
-        case AstNodeType.EndTagNode: return 'EndTagNode'
-        case AstNodeType.AttrNode: return 'AttrNode'
-    }
+export type AstNodeJson = {
+    type: AstNodeType
+    data?: Record<string, string | AstNodeJson>
+    children?: Array<AstNodeJson>
 }
 
 export abstract class AstNode {
     readonly abstract nodeType: AstNodeType
 
-    // eslint-disable-next-line no-use-before-define
-    readonly children: Array<AstNode>
-
-    constructor(children: Array<AstNode> = []) {
-        this.children = children
+    constructor(
+        readonly children: Array<AstNode> = [],
+    ) {
+        // nop
     }
 
     addChild(node: AstNode): void {
@@ -86,7 +79,7 @@ export abstract class AstNode {
     }
 
     toShortString(): string {
-        return nodeTypeToString(this.nodeType)
+        return this.nodeType
     }
 
     // For debugging purposes only
@@ -99,6 +92,18 @@ export abstract class AstNode {
         }
 
         return s
+    }
+
+    toJSON(): AstNodeJson {
+        const json: AstNodeJson = {
+            type: this.nodeType,
+        }
+
+        if (this.children.length > 0) {
+            json.children = this.children.map((child) => child.toJSON())
+        }
+
+        return json
     }
 }
 
@@ -141,6 +146,16 @@ export class TextNode extends AstNode {
 
     override toShortString(): string {
         return `${super.toShortString()} "${this.str}"`
+    }
+
+    override toJSON(): AstNodeJson {
+        const json = super.toJSON()
+
+        json.data = {
+            str: this.str,
+        }
+
+        return json
     }
 }
 
@@ -219,6 +234,30 @@ export class AttrNode extends AstNode {
 
         return s
     }
+
+    override toJSON(): AstNodeJson {
+        const json: AstNodeJson = {
+            type: this.nodeType,
+        }
+
+        switch (this.children.length) {
+            case 1: {
+                json.data = {
+                    key: this.key,
+                }
+                break
+            }
+            case 2: {
+                json.data = {
+                    key: this.key,
+                    val: this.val,
+                }
+                break
+            }
+        }
+
+        return json
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -249,6 +288,16 @@ export class StartTagNode extends AstNode {
     override toShortString(): string {
         return `${super.toShortString()} ${this.ogTag}`
     }
+
+    override toJSON(): AstNodeJson {
+        const json = super.toJSON()
+
+        json.data = {
+            tag: this.tagName,
+        }
+
+        return json
+    }
 }
 
 export class EndTagNode extends AstNode {
@@ -268,6 +317,16 @@ export class EndTagNode extends AstNode {
 
     override toShortString(): string {
         return `${super.toShortString()} ${this.ogTag}`
+    }
+
+    override toJSON(): AstNodeJson {
+        const json = super.toJSON()
+
+        json.data = {
+            tag: this.tagName,
+        }
+
+        return json
     }
 }
 
@@ -334,5 +393,19 @@ export class TagNode extends AstNode {
         }
 
         return s
+    }
+
+    override toJSON(): AstNodeJson {
+        const json = super.toJSON()
+
+        json.data = {
+            startTag: this._startTag.toJSON(),
+        }
+
+        if (this._endTag) {
+            json.data.endTag = this._endTag.toJSON()
+        }
+
+        return json
     }
 }

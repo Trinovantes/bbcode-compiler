@@ -88,6 +88,13 @@ export const htmlTransforms: ReadonlyArray<Transform> = [
         },
     },
     {
+        name: 'br',
+        isStandalone: true,
+        start: () => {
+            return '<br />'
+        },
+    },
+    {
         name: 'list',
         start: (tagNode) => {
             return isOrderedList(tagNode)

@@ -1,15 +1,17 @@
 import path from 'node:path'
-import { defineConfig } from 'vitest/config'
+import { defineConfig, mergeConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
 
-export default defineConfig({
+export const commonConfig = defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src'),
             'tests': path.resolve(__dirname, 'tests'),
         },
     },
+})
 
+export default mergeConfig(commonConfig, defineConfig({
     test: {
         dir: './tests',
         silent: Boolean(process.env.CI),
@@ -32,4 +34,4 @@ export default defineConfig({
             tsconfigPath: path.resolve(__dirname, './tsconfig.prod.json'),
         }),
     ],
-})
+}))
