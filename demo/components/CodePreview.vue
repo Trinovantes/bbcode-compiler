@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
 import { codeToHtml } from 'shiki'
-import { Generator, htmlTransforms, Lexer, Parser } from '@/index.js'
+import { Generator, htmlTransforms, Lexer, Parser } from '../../src/index.js'
 
 type Tab = 'HTML_RENDER' | 'RAW_HTML' | 'AST'
 const currentTab = ref<Tab>('HTML_RENDER')
@@ -45,7 +45,7 @@ const renderedPreview = ref('')
 const renderedHtmlPre = ref('')
 const outputAst = ref('')
 
-watch(editorText, async(editorText) => {
+watch(editorText, async (editorText) => {
     renderedHtmlPre.value = ''
     renderedPreview.value = ''
     outputAst.value = ''

@@ -1,6 +1,6 @@
 import { validationTests } from '../data/validationTests.js'
 import { xssTests } from '../data/xssTests.js'
-import { generateHtml } from '@/index.js'
+import { generateHtml } from '../../src/index.js'
 import { describe, test, expect } from 'vitest'
 
 describe('Generator', () => {

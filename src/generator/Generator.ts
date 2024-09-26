@@ -1,4 +1,4 @@
-import { AstNode, AstNodeType, RootNode } from '../parser/AstNode.js'
+import { AstNode, RootNode } from '../parser/AstNode.js'
 import { nodeIsType } from '../parser/nodeIsType.js'
 import { htmlTransforms } from './transforms/htmlTransforms.js'
 import type { Transform } from './transforms/Transform.js'
@@ -14,7 +14,7 @@ export class Generator {
         const stringify = (node: AstNode): string => {
             let output = ''
 
-            if (nodeIsType(node, AstNodeType.TagNode)) {
+            if (nodeIsType(node, 'TagNode')) {
                 const tagName = node.tagName
                 const transform = this.transforms.get(tagName)
                 if (!transform) {
@@ -42,9 +42,9 @@ export class Generator {
                 } else {
                     output += renderedEndTag
                 }
-            } else if (nodeIsType(node, AstNodeType.TextNode)) {
+            } else if (nodeIsType(node, 'TextNode')) {
                 output += node.str
-            } else if (nodeIsType(node, AstNodeType.LinebreakNode)) {
+            } else if (nodeIsType(node, 'LinebreakNode')) {
                 output += '\n'
             } else {
                 for (const child of node.children) {

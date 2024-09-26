@@ -1,4 +1,4 @@
-import { AstNodeType, TagNode } from '../../parser/AstNode.js'
+import { TagNode } from '../../parser/AstNode.js'
 import { nodeIsType } from '../../parser/nodeIsType.js'
 
 /**
@@ -16,7 +16,7 @@ export function getTagImmediateText(tagNode: TagNode): string | undefined {
     }
 
     const child = tagNode.children[0]
-    if (!nodeIsType(child, AstNodeType.RootNode)) {
+    if (!nodeIsType(child, 'RootNode')) {
         return undefined
     }
 
@@ -25,7 +25,7 @@ export function getTagImmediateText(tagNode: TagNode): string | undefined {
     }
 
     const textNode = child.children[0]
-    if (!nodeIsType(textNode, AstNodeType.TextNode)) {
+    if (!nodeIsType(textNode, 'TextNode')) {
         return undefined
     }
 

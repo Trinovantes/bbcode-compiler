@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { Generator, getTagImmediateText, Transform, Lexer, getWidthHeightAttr, Parser, stringifyTokens, AstNodeType } from '@/index.js'
+import { Generator, getTagImmediateText, type Transform, Lexer, getWidthHeightAttr, Parser, stringifyTokens } from '../../src/index.js'
 
 const input = '[youtube]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/youtube]'
 const customTransforms: Array<Transform> = [
@@ -50,12 +50,12 @@ describe('Custom', () => {
             expect(root.children.length).toBe(1)
 
             const tagNode = root.children[0]
-            expect(tagNode.nodeType).toBe(AstNodeType.TagNode)
+            expect(tagNode.nodeType).toBe('TagNode')
             expect(tagNode.children.length).toBe(1)
 
-            expect(tagNode.children[0].nodeType).toBe(AstNodeType.RootNode)
+            expect(tagNode.children[0].nodeType).toBe('RootNode')
             expect(tagNode.children[0].children.length).toBe(1)
-            expect(tagNode.children[0].children[0].nodeType).toBe(AstNodeType.TextNode)
+            expect(tagNode.children[0].children[0].nodeType).toBe('TextNode')
         })
     })
 

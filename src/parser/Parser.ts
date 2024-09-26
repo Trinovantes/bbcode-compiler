@@ -1,7 +1,7 @@
 import { htmlTransforms } from '../generator/transforms/htmlTransforms.js'
-import { stringifyTokens, Token } from '../lexer/Token.js'
-import { isStringToken, TokenType } from '../lexer/TokenType.js'
-import { RootNode, AttrNode, TextNode, LinebreakNode, StartTagNode, EndTagNode, AstNodeType, TagNode, AstNode } from './AstNode.js'
+import { stringifyTokens, type Token } from '../lexer/Token.js'
+import { isStringToken } from '../lexer/TokenType.js'
+import { RootNode, AttrNode, TextNode, LinebreakNode, StartTagNode, EndTagNode, TagNode, AstNode } from './AstNode.js'
 import { nodeIsType } from './nodeIsType.js'
 
 export class Parser {
@@ -33,7 +33,7 @@ export class Parser {
                     break
                 }
 
-                if (endOnQuotes && (tokens[idx].type === TokenType.XSS_S_QUOTE || tokens[idx].type === TokenType.XSS_D_QUOTE)) {
+                if (endOnQuotes && (tokens[idx].type === 'XSS_S_QUOTE' || tokens[idx].type === 'XSS_D_QUOTE')) {
                     break
                 }
 
@@ -56,13 +56,13 @@ export class Parser {
 
                     if (spaceIdx >= 0) {
                         const oldToken: Token = {
-                            type: TokenType.STR,
+                            type: 'STR',
                             offset: tokens[idx].offset,
                             length: spaceIdx,
                         }
 
                         const newToken: Token = {
-                            type: TokenType.STR,
+                            type: 'STR',
                             offset: tokens[idx].offset + spaceIdx,
                             length: tokens[idx].length - spaceIdx,
                         }
@@ -90,10 +90,10 @@ export class Parser {
 
             const attrNode = new AttrNode()
 
-            if (tokens[idx].type === TokenType.EQUALS && isStringToken(tokens[idx + 1].type)) { // [Tag = VAL ...] or [Tag = "VAL"]
+            if (tokens[idx].type === 'EQUALS' && isStringToken(tokens[idx + 1].type)) { // [Tag = VAL ...] or [Tag = "VAL"]
                 idx += 1 // Consume EQUALS
 
-                const openedWithQuotes = tokens[idx].type === TokenType.XSS_S_QUOTE || tokens[idx].type === TokenType.XSS_D_QUOTE
+                const openedWithQuotes = tokens[idx].type === 'XSS_S_QUOTE' || tokens[idx].type === 'XSS_D_QUOTE'
                 if (openedWithQuotes) {
                     idx += 1
                 }
@@ -102,19 +102,19 @@ export class Parser {
                 attrNode.addChild(valNode)
 
                 if (openedWithQuotes) {
-                    if (tokens[idx].type !== TokenType.XSS_S_QUOTE && tokens[idx].type !== TokenType.XSS_D_QUOTE) {
+                    if (tokens[idx].type !== 'XSS_S_QUOTE' && tokens[idx].type !== 'XSS_D_QUOTE') {
                         return null
                     }
 
                     idx += 1
                 }
-            } else if (isStringToken(tokens[idx].type) && tokens[idx + 1].type === TokenType.EQUALS && (idx + 2 < tokens.length && isStringToken(tokens[idx + 2].type))) { // [Tag KEY = VAL ...] or [Tag KEY = "VAL" ...]
+            } else if (isStringToken(tokens[idx].type) && tokens[idx + 1].type === 'EQUALS' && (idx + 2 < tokens.length && isStringToken(tokens[idx + 2].type))) { // [Tag KEY = VAL ...] or [Tag KEY = "VAL" ...]
                 const keyNode = parseText()
                 attrNode.addChild(keyNode)
 
                 idx += 1 // Consume EQUALS
 
-                const openedWithQuotes = tokens[idx].type === TokenType.XSS_S_QUOTE || tokens[idx].type === TokenType.XSS_D_QUOTE
+                const openedWithQuotes = tokens[idx].type === 'XSS_S_QUOTE' || tokens[idx].type === 'XSS_D_QUOTE'
                 if (openedWithQuotes) {
                     idx += 1
                 }
@@ -122,7 +122,7 @@ export class Parser {
                 const valNode = parseText(openedWithQuotes, true)
 
                 if (openedWithQuotes) {
-                    if (tokens[idx].type !== TokenType.XSS_S_QUOTE && tokens[idx].type !== TokenType.XSS_D_QUOTE) {
+                    if (tokens[idx].type !== 'XSS_S_QUOTE' && tokens[idx].type !== 'XSS_D_QUOTE') {
                         return null
                     }
 
@@ -130,7 +130,7 @@ export class Parser {
                 }
 
                 attrNode.addChild(valNode)
-            } else if (isStringToken(tokens[idx].type) && tokens[idx + 1].type !== TokenType.EQUALS) { // [Tag VAL ...]
+            } else if (isStringToken(tokens[idx].type) && tokens[idx + 1].type !== 'EQUALS') { // [Tag VAL ...]
                 const valNode = parseText()
                 attrNode.addChild(valNode)
             } else {
@@ -145,7 +145,7 @@ export class Parser {
                 return null
             }
 
-            if (tokens[idx].type !== TokenType.L_BRACKET) {
+            if (tokens[idx].type !== 'L_BRACKET') {
                 return null
             }
 
@@ -169,7 +169,7 @@ export class Parser {
                     attrNodes.push(attrNode)
                 }
 
-                if (tokens[idx].type !== TokenType.R_BRACKET) {
+                if (tokens[idx].type !== 'R_BRACKET') {
                     return null
                 }
 
@@ -182,7 +182,7 @@ export class Parser {
             }
 
             // If L_BRACKET is followed by BACKSLASH, then it must be EndTag or is invalid
-            if (tokens[idx + 1].type === TokenType.BACKSLASH) {
+            if (tokens[idx + 1].type === 'BACKSLASH') {
                 const startIdx = idx
                 idx += 1 // Consume L_BRACKET
                 idx += 1 // Consume BACKSLASH
@@ -192,7 +192,7 @@ export class Parser {
                     return null
                 }
 
-                if (tokens[idx].type !== TokenType.R_BRACKET) {
+                if (tokens[idx].type !== 'R_BRACKET') {
                     return null
                 }
 
@@ -211,7 +211,7 @@ export class Parser {
             const root = new RootNode()
 
             while (idx < tokens.length) {
-                if (tokens[idx].type === TokenType.L_BRACKET) {
+                if (tokens[idx].type === 'L_BRACKET') {
                     const startIdx = idx
                     const tagNode = parseTag()
 
@@ -223,14 +223,14 @@ export class Parser {
                         const textNode = new TextNode(str)
                         root.addChild(textNode)
                     }
-                } else if (tokens[idx].type === TokenType.LINEBREAK) {
+                } else if (tokens[idx].type === 'LINEBREAK') {
                     idx += 1 // Consume LINEBREAK
                     root.addChild(new LinebreakNode())
                 } else {
                     const startIdx = idx
 
                     // Advance until we see the start of another RootNode's child (TagNode or LinebreakNode)
-                    while (idx < tokens.length && tokens[idx].type !== TokenType.L_BRACKET && tokens[idx].type !== TokenType.LINEBREAK) {
+                    while (idx < tokens.length && tokens[idx].type !== 'L_BRACKET' && tokens[idx].type !== 'LINEBREAK') {
                         idx += 1
                     }
 
@@ -258,7 +258,7 @@ export class Parser {
         for (let i = 0; i < rootNode.children.length; i++) {
             const child = rootNode.children[i]
 
-            if (nodeIsType(child, AstNodeType.StartTagNode)) {
+            if (nodeIsType(child, 'StartTagNode')) {
                 const endTag = this.findMatchingEndTag(rootNode.children, i, child.tagName)
                 const isStandalone = this.standaloneTags.has(child.tagName)
 
@@ -278,13 +278,13 @@ export class Parser {
                     // If no end tag exists, then treat tag as string literal
                     transformedRoot.addChild(new TextNode(child.ogTag))
                 }
-            } else if (nodeIsType(child, AstNodeType.EndTagNode)) {
+            } else if (nodeIsType(child, 'EndTagNode')) {
                 // Encountered end tag when we're not expecting an end tag so we treat it as a string literal
                 transformedRoot.addChild(new TextNode(child.ogTag))
-            } else if (nodeIsType(child, AstNodeType.TextNode)) {
+            } else if (nodeIsType(child, 'TextNode')) {
                 // Normal text nodes get copied
                 transformedRoot.addChild(child)
-            } else if (nodeIsType(child, AstNodeType.LinebreakNode)) {
+            } else if (nodeIsType(child, 'LinebreakNode')) {
                 // Linebreak nodes get copied
                 transformedRoot.addChild(child)
             } else {
@@ -303,8 +303,8 @@ export class Parser {
         for (let i = startIdx; i < siblings.length; i++) {
             const sibling = siblings[i]
             const isEndTag =
-                (nodeIsType(sibling, AstNodeType.LinebreakNode) && this.linebreakTerminatedTags.has(tagName)) ||
-                (nodeIsType(sibling, AstNodeType.EndTagNode) && sibling.tagName === tagName)
+                (nodeIsType(sibling, 'LinebreakNode') && this.linebreakTerminatedTags.has(tagName)) ||
+                (nodeIsType(sibling, 'EndTagNode') && sibling.tagName === tagName)
 
             if (isEndTag) {
                 return {

@@ -4,5 +4,5 @@ declare module '@bbob/html' {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     function bbobHTML(input: string, preset: Preset): string
 
-    export default { default: bbobHTML }
+    export default bbobHTML
 }

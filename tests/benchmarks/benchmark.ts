@@ -12,7 +12,7 @@ for (const { name, run } of benchmarkRunners) {
 }
 
 suite.on('cycle', (event: Benchmark.Event) => {
-    console.info(String(event.target))
+    console.info(String(event.target as unknown as string))
 })
 
 suite.on('complete', () => {

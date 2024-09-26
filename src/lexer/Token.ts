@@ -1,4 +1,4 @@
-import { TokenType } from './TokenType.js'
+import type { TokenType } from './TokenType.js'
 
 export type Token = {
     type: TokenType
@@ -11,49 +11,49 @@ export function stringifyTokens(ogText: string, tokens: ReadonlyArray<Token>): s
 
     for (const token of tokens) {
         switch (token.type) {
-            case TokenType.STR: {
+            case 'STR': {
                 s += ogText.substring(token.offset, token.offset + token.length)
                 break
             }
-            case TokenType.LINEBREAK: {
+            case 'LINEBREAK': {
                 s += '\n'
                 break
             }
 
-            case TokenType.L_BRACKET: {
+            case 'L_BRACKET': {
                 s += '['
                 break
             }
-            case TokenType.R_BRACKET: {
+            case 'R_BRACKET': {
                 s += ']'
                 break
             }
-            case TokenType.BACKSLASH: {
+            case 'BACKSLASH': {
                 s += '/'
                 break
             }
-            case TokenType.EQUALS: {
+            case 'EQUALS': {
                 s += '='
                 break
             }
 
-            case TokenType.XSS_AMP: {
+            case 'XSS_AMP': {
                 s += '&amp;'
                 break
             }
-            case TokenType.XSS_LT: {
+            case 'XSS_LT': {
                 s += '&lt;'
                 break
             }
-            case TokenType.XSS_GT: {
+            case 'XSS_GT': {
                 s += '&gt;'
                 break
             }
-            case TokenType.XSS_D_QUOTE: {
+            case 'XSS_D_QUOTE': {
                 s += '&quot;'
                 break
             }
-            case TokenType.XSS_S_QUOTE: {
+            case 'XSS_S_QUOTE': {
                 s += '&#x27;'
                 break
             }

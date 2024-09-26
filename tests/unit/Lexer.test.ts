@@ -1,6 +1,6 @@
 import { validationTests } from '../data/validationTests.js'
 import { xssTests } from '../data/xssTests.js'
-import { Lexer, Token, TokenType } from '@/index.js'
+import { Lexer, type Token } from '../../src/index.js'
 import { describe, test, expect } from 'vitest'
 
 describe('Lexer', () => {
@@ -33,8 +33,8 @@ function expectValidTokens(tokens: Array<Token>) {
         expect(prevToken.offset).toBeLessThan(currToken.offset)
         expect(prevToken.offset + prevToken.length).toBe(currToken.offset)
 
-        if (currToken.type === TokenType.BACKSLASH) {
-            expect(prevToken.type).toBe(TokenType.L_BRACKET)
+        if (currToken.type === 'BACKSLASH') {
+            expect(prevToken.type).toBe('L_BRACKET')
         }
     }
 }

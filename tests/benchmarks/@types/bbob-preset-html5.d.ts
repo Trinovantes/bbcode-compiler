@@ -4,6 +4,6 @@ declare module '@bbob/preset-html5' {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     function presetHTML5(): Preset
 
-    export default { default: presetHTML5 }
+    export default presetHTML5
     export { Preset }
 }

@@ -39,15 +39,14 @@ import { nodeIsType } from './nodeIsType.js'
 // MARK: AstNode
 // ----------------------------------------------------------------------------
 
-export const enum AstNodeType {
-    RootNode = 'RootNode',
-    TextNode = 'TextNode',
-    LinebreakNode = 'LinebreakNode',
-    TagNode = 'TagNode',
-    StartTagNode = 'StartTagNode',
-    EndTagNode = 'EndTagNode',
-    AttrNode = 'AttrNode',
-}
+export type AstNodeType =
+    | 'RootNode'
+    | 'TextNode'
+    | 'LinebreakNode'
+    | 'TagNode'
+    | 'StartTagNode'
+    | 'EndTagNode'
+    | 'AttrNode'
 
 export type AstNodeJson = {
     type: AstNodeType
@@ -58,10 +57,12 @@ export type AstNodeJson = {
 export abstract class AstNode {
     readonly abstract nodeType: AstNodeType
 
+    readonly children: Array<AstNode>
+
     constructor(
-        readonly children: Array<AstNode> = [],
+        children = new Array<AstNode>(),
     ) {
-        // nop
+        this.children = children
     }
 
     addChild(node: AstNode): void {
@@ -112,13 +113,13 @@ export abstract class AstNode {
 // ----------------------------------------------------------------------------
 
 export class RootNode extends AstNode {
-    readonly nodeType = AstNodeType.RootNode
+    readonly nodeType = 'RootNode'
 
     override isValid(): boolean {
         for (const child of this.children) {
-            if (child.nodeType !== AstNodeType.TagNode &&
-                child.nodeType !== AstNodeType.TextNode &&
-                child.nodeType !== AstNodeType.LinebreakNode) {
+            if (child.nodeType !== 'TagNode' &&
+                child.nodeType !== 'TextNode' &&
+                child.nodeType !== 'LinebreakNode') {
                 return false
             }
         }
@@ -132,7 +133,7 @@ export class RootNode extends AstNode {
 // ----------------------------------------------------------------------------
 
 export class TextNode extends AstNode {
-    readonly nodeType = AstNodeType.TextNode
+    readonly nodeType = 'TextNode'
     readonly str: string
 
     constructor(str: string) {
@@ -160,7 +161,7 @@ export class TextNode extends AstNode {
 }
 
 export class LinebreakNode extends AstNode {
-    readonly nodeType = AstNodeType.LinebreakNode
+    readonly nodeType = 'LinebreakNode'
 
     override toShortString(): string {
         return `${super.toShortString()} "\\n"`
@@ -172,7 +173,7 @@ export class LinebreakNode extends AstNode {
 // ----------------------------------------------------------------------------
 
 export class AttrNode extends AstNode {
-    readonly nodeType = AstNodeType.AttrNode
+    readonly nodeType = 'AttrNode'
 
     static readonly DEFAULT_KEY = 'default'
 
@@ -182,7 +183,7 @@ export class AttrNode extends AstNode {
                 return AttrNode.DEFAULT_KEY
             }
             case 2: {
-                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
+                if (!nodeIsType(this.children[0], 'TextNode')) {
                     throw new Error('Invalid TextNode')
                 }
 
@@ -196,14 +197,14 @@ export class AttrNode extends AstNode {
     get val(): string {
         switch (this.children.length) {
             case 1: {
-                if (!nodeIsType(this.children[0], AstNodeType.TextNode)) {
+                if (!nodeIsType(this.children[0], 'TextNode')) {
                     throw new Error('Invalid TextNode')
                 }
 
                 return this.children[0].str.trim()
             }
             case 2: {
-                if (!nodeIsType(this.children[1], AstNodeType.TextNode)) {
+                if (!nodeIsType(this.children[1], 'TextNode')) {
                     throw new Error('Invalid TextNode')
                 }
 
@@ -265,7 +266,7 @@ export class AttrNode extends AstNode {
 // ----------------------------------------------------------------------------
 
 export class StartTagNode extends AstNode {
-    readonly nodeType = AstNodeType.StartTagNode
+    readonly nodeType = 'StartTagNode'
     readonly tagName: string
     readonly ogTag: string
 
@@ -277,7 +278,7 @@ export class StartTagNode extends AstNode {
 
     override isValid(): boolean {
         for (const child of this.children) {
-            if (child.nodeType !== AstNodeType.AttrNode) {
+            if (child.nodeType !== 'AttrNode') {
                 return false
             }
         }
@@ -301,7 +302,7 @@ export class StartTagNode extends AstNode {
 }
 
 export class EndTagNode extends AstNode {
-    readonly nodeType = AstNodeType.EndTagNode
+    readonly nodeType = 'EndTagNode'
     readonly tagName: string
     readonly ogTag: string
 
@@ -331,7 +332,7 @@ export class EndTagNode extends AstNode {
 }
 
 export class TagNode extends AstNode {
-    readonly nodeType = AstNodeType.TagNode
+    readonly nodeType = 'TagNode'
     private readonly _startTag: StartTagNode
     private readonly _endTag?: EndTagNode | LinebreakNode
 
@@ -358,7 +359,7 @@ export class TagNode extends AstNode {
             return ''
         }
 
-        if (nodeIsType(this._endTag, AstNodeType.LinebreakNode)) {
+        if (nodeIsType(this._endTag, 'LinebreakNode')) {
             return '\n'
         } else {
             return this._endTag.ogTag
@@ -366,11 +367,11 @@ export class TagNode extends AstNode {
     }
 
     override isValid(): boolean {
-        if (this._endTag && nodeIsType(this._endTag, AstNodeType.EndTagNode) && this._startTag.tagName !== this._endTag.tagName) {
+        if (this._endTag && nodeIsType(this._endTag, 'EndTagNode') && this._startTag.tagName !== this._endTag.tagName) {
             return false
         }
 
-        if (this.children.length === 1 && this.children[0].nodeType !== AstNodeType.RootNode) {
+        if (this.children.length === 1 && this.children[0].nodeType !== 'RootNode') {
             return false
         }
 
