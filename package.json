@@ -36,7 +36,7 @@
         "build": "yarn clean && vite build",
         "prepublishOnly": "yarn build",
         "prepare": "patch-package",
-        "lint": "vue-tsc --noEmit && eslint",
+        "lint": "vue-tsc --noemit && eslint",
         "test": "vitest",
         "benchmark": "tsx tests/benchmarks/benchmark.ts",
         "profile": "tsx --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
