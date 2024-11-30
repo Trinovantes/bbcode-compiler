@@ -40,7 +40,7 @@ export const benchmarkRunners: Array<BenchmarkRunner> = [
     },
     {
         name: 'bbob',
-        run: (input) => bbobHTML.default(input, presetHTML5.default()),
+        run: (input) => bbobHTML(input, presetHTML5()),
     },
     {
         name: 'yabbcode',
