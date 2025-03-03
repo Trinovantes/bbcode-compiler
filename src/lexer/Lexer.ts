@@ -1,4 +1,4 @@
-import { symbolTable, TokenType } from './TokenType.js'
+import { symbolTable } from './TokenType.js'
 import type { Token } from './Token.js'
 
 export class Lexer {
@@ -25,7 +25,7 @@ export class Lexer {
             const length = match.index - offset
             if (length > 0) {
                 tokens.push({
-                    type: TokenType.STR,
+                    type: 'STR',
                     offset,
                     length,
                 })
@@ -37,21 +37,21 @@ export class Lexer {
             // In the regex '[/' takes precedence over '['
             if (match[0] === '[/') {
                 tokens.push({
-                    type: TokenType.L_BRACKET,
+                    type: 'L_BRACKET',
                     offset,
                     length: 1,
                 })
                 offset += 1
 
                 tokens.push({
-                    type: TokenType.BACKSLASH,
+                    type: 'BACKSLASH',
                     offset,
                     length: 1,
                 })
                 offset += 1
             } else if (match[0].startsWith('[')) {
                 tokens.push({
-                    type: TokenType.L_BRACKET,
+                    type: 'L_BRACKET',
                     offset,
                     length: 1,
                 })
@@ -59,14 +59,14 @@ export class Lexer {
 
                 const length = match[0].length - 1
                 tokens.push({
-                    type: TokenType.STR,
+                    type: 'STR',
                     offset,
                     length,
                 })
                 offset += length
             } else {
                 tokens.push({
-                    type: symbolTable[match[0]] ?? TokenType.STR,
+                    type: symbolTable[match[0]] ?? 'STR',
                     offset,
                     length: 1,
                 })
@@ -78,7 +78,7 @@ export class Lexer {
         const length = input.length - offset
         if (length > 0) {
             tokens.push({
-                type: TokenType.STR,
+                type: 'STR',
                 offset,
                 length,
             })
