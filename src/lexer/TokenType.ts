@@ -1,19 +1,19 @@
 export type TokenType =
-    'STR' |
-    'LINEBREAK' |
+    | 'STR'
+    | 'LINEBREAK'
 
     // BBCode symbols
-    'L_BRACKET' |
-    'R_BRACKET' |
-    'BACKSLASH' |
-    'EQUALS' |
+    | 'L_BRACKET'
+    | 'R_BRACKET'
+    | 'BACKSLASH'
+    | 'EQUALS'
 
     // XSS symbols
-    'XSS_AMP' |
-    'XSS_LT' |
-    'XSS_GT' |
-    'XSS_D_QUOTE' |
-    'XSS_S_QUOTE'
+    | 'XSS_AMP'
+    | 'XSS_LT'
+    | 'XSS_GT'
+    | 'XSS_D_QUOTE'
+    | 'XSS_S_QUOTE'
 
 export function tokenTypeToString(tokenType: TokenType): string {
     switch (tokenType) {

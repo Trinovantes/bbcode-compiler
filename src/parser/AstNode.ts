@@ -40,13 +40,13 @@ import { nodeIsType } from './nodeIsType.js'
 // ----------------------------------------------------------------------------
 
 export type AstNodeType =
-    'RootNode' |
-    'TextNode' |
-    'LinebreakNode' |
-    'TagNode' |
-    'StartTagNode' |
-    'EndTagNode' |
-    'AttrNode'
+    | 'RootNode'
+    | 'TextNode'
+    | 'LinebreakNode'
+    | 'TagNode'
+    | 'StartTagNode'
+    | 'EndTagNode'
+    | 'AttrNode'
 
 export type AstNodeJson = {
     type: AstNodeType
@@ -57,7 +57,6 @@ export type AstNodeJson = {
 export abstract class AstNode {
     readonly abstract nodeType: AstNodeType
 
-    // eslint-disable-next-line no-use-before-define
     readonly children: Array<AstNode>
 
     constructor(
