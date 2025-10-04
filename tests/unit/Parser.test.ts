@@ -1,6 +1,6 @@
-import { validationTests } from '../data/validationTests.js'
-import { xssTests } from '../data/xssTests.js'
-import { Lexer, Parser } from '../../src/index.js'
+import { validationTests } from '../data/validationTests.ts'
+import { xssTests } from '../data/xssTests.ts'
+import { Lexer, Parser } from '../../src/index.ts'
 import { describe, test, expect } from 'vitest'
 
 describe('Parser', () => {

@@ -1,4 +1,4 @@
-import type { TokenType } from './TokenType.js'
+import type { TokenType } from './TokenType.ts'
 
 export type Token = {
     type: TokenType

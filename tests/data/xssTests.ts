@@ -1,4 +1,4 @@
-import type { XssTestCase } from './TestCase.js'
+import type { XssTestCase } from './TestCase.ts'
 
 const urlXssTests: Array<XssTestCase> = [
     {

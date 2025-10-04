@@ -1,6 +1,6 @@
 import Benchmark from 'benchmark'
-import { getBenchmarkInput } from './input/getBenchmarkInput.js'
-import { benchmarkRunners } from './benchmarkRunners.js'
+import { getBenchmarkInput } from './input/getBenchmarkInput.ts'
+import { benchmarkRunners } from './benchmarkRunners.ts'
 
 const input = await getBenchmarkInput()
 const suite = new Benchmark.Suite('BBCode Comparison')

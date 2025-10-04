@@ -6,7 +6,7 @@ import bbcodejs from 'bbcodejs'
 import MarkdownIt from 'markdown-it'
 import TsBbcodeParser from 'ts-bbcode-parser'
 import Yabbcode from 'ya-bbcode'
-import { generateHtml } from '../../src/index.js'
+import { generateHtml } from '../../src/index.ts'
 
 type BenchmarkRunner = {
     name: string

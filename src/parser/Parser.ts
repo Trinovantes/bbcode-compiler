@@ -1,8 +1,8 @@
-import { htmlTransforms } from '../generator/transforms/htmlTransforms.js'
-import { stringifyTokens, type Token } from '../lexer/Token.js'
-import { isStringToken } from '../lexer/TokenType.js'
-import { RootNode, AttrNode, TextNode, LinebreakNode, StartTagNode, EndTagNode, TagNode, AstNode } from './AstNode.js'
-import { nodeIsType } from './nodeIsType.js'
+import { htmlTransforms } from '../generator/transforms/htmlTransforms.ts'
+import { stringifyTokens, type Token } from '../lexer/Token.ts'
+import { isStringToken } from '../lexer/TokenType.ts'
+import { RootNode, AttrNode, TextNode, LinebreakNode, StartTagNode, EndTagNode, TagNode, AstNode } from './AstNode.ts'
+import { nodeIsType } from './nodeIsType.ts'
 
 export class Parser {
     readonly tags: Set<string>

@@ -1,6 +1,6 @@
-import { validationTests } from '../data/validationTests.js'
-import { xssTests } from '../data/xssTests.js'
-import { Lexer, type Token } from '../../src/index.js'
+import { validationTests } from '../data/validationTests.ts'
+import { xssTests } from '../data/xssTests.ts'
+import { Lexer, type Token } from '../../src/index.ts'
 import { describe, test, expect } from 'vitest'
 
 describe('Lexer', () => {

@@ -1,9 +1,9 @@
-import { getTagImmediateAttrVal } from '../utils/getTagImmediateAttrVal.js'
-import { getTagImmediateText } from '../utils/getTagImmediateText.js'
-import { getWidthHeightAttr } from '../utils/getWidthHeightAttr.js'
-import { isDangerousUrl } from '../utils/isDangerousUrl.js'
-import { isOrderedList } from '../utils/isOrderedList.js'
-import type { Transform } from './Transform.js'
+import { getTagImmediateAttrVal } from '../utils/getTagImmediateAttrVal.ts'
+import { getTagImmediateText } from '../utils/getTagImmediateText.ts'
+import { getWidthHeightAttr } from '../utils/getWidthHeightAttr.ts'
+import { isDangerousUrl } from '../utils/isDangerousUrl.ts'
+import { isOrderedList } from '../utils/isOrderedList.ts'
+import type { Transform } from './Transform.ts'
 
 export const htmlTransforms: ReadonlyArray<Transform> = [
     {

@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
 import { codeToHtml } from 'shiki'
-import { Generator, htmlTransforms, Lexer, Parser } from '../../src/index.js'
+import { Generator, htmlTransforms, Lexer, Parser } from '../../src/index.ts'
 
 type Tab = 'HTML_RENDER' | 'RAW_HTML' | 'AST'
 const currentTab = ref<Tab>('HTML_RENDER')

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { Generator, getTagImmediateText, type Transform, Lexer, getWidthHeightAttr, Parser, stringifyTokens } from '../../src/index.js'
+import { Generator, getTagImmediateText, type Transform, Lexer, getWidthHeightAttr, Parser, stringifyTokens } from '../../src/index.ts'
 
 const input = '[youtube]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/youtube]'
 const customTransforms: Array<Transform> = [

@@ -1,4 +1,4 @@
-import type { TagNode } from '../../parser/AstNode.js'
+import type { TagNode } from '../../parser/AstNode.ts'
 
 export type Transform = {
     name: string

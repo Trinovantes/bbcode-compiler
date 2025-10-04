@@ -1,5 +1,5 @@
-import { symbolTable } from './TokenType.js'
-import type { Token } from './Token.js'
+import { symbolTable } from './TokenType.ts'
+import type { Token } from './Token.ts'
 
 export class Lexer {
     tokenize(input: Readonly<string>): Array<Token> {

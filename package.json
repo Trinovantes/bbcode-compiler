@@ -37,8 +37,8 @@
         "prepublishOnly": "pnpm clean && pnpm build",
         "lint": "vue-tsc && eslint",
         "test": "vitest",
-        "benchmark": "tsx tests/benchmarks/benchmark.ts",
-        "profile": "tsx --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
+        "benchmark": "bun ./tests/benchmarks/benchmark.ts",
+        "prof": "node --prof --no-logfile-per-isolate tests/benchmarks/profile.ts && node --prof-process v8.log > v8.txt"
     },
     "devDependencies": {
         "@bbob/html": "^4.2.0",
@@ -71,8 +71,6 @@
         "sass": "^1.77.6",
         "shiki": "^3.1.0",
         "ts-bbcode-parser": "^1.0.4",
-        "ts-node": "^10.8.1",
-        "tsx": "^4.15.7",
         "typescript": "^5.8.1-rc",
         "typescript-eslint": "^8.0.0-alpha.24",
         "vite": "^7.1.5",

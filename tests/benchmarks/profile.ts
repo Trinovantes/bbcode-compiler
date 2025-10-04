@@ -1,5 +1,5 @@
-import { generateHtml } from '../../src/index.js'
-import { getBenchmarkInput } from './input/getBenchmarkInput.js'
+import { generateHtml } from '../../src/index.ts'
+import { getBenchmarkInput } from './input/getBenchmarkInput.ts'
 
 const input = await getBenchmarkInput()
 
